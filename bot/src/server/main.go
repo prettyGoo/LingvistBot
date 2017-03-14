@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	ApiToken   = "373643335:AAGQ_V1j7yV1kWMHdR-3RSc0tW44tioeY2Y"
+	ApiToken   = "373643335:AAGQ_V1j7yV1kWMHdR-3RSc0tW44tioe"
 	ApiRequest = "https://api.telegram.org/bot%s/%s"
 )
 
