@@ -21,13 +21,18 @@ type User struct {
 	LastName  string `json:"last_name"`
 }
 
-type Message struct {
-	Id   int `json:"message_id"`
-	From User
-	Chat Chat
-	Text string
-}
-
 type Chat struct {
 	Id int
+}
+
+type Message struct {
+	Id       int `json:"message_id"`
+	From     User
+	Chat     Chat
+	Text     string
+	Entities []MessageEntity
+}
+
+type MessageEntity struct {
+	Type string
 }
