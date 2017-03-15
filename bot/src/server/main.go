@@ -22,7 +22,7 @@ var (
 func main() {
 	fmt.Println("LingvistBot for Telegram!\n")
 	httpClient = http.Client{}
-	//	getMe()
+	//	getMe
 
 	offset := 0
 	for {
@@ -66,7 +66,12 @@ func getUpdates(offset int) ([]Update, error) {
 	for _, update := range updates {
 		for _, entity := range updates[0].Message.Entities {
 			if entity.Type == "bot_command" {
-				trainCommand(update.Message.Chat.Id)
+				if update.Message.Text == "/train" {
+					trainCommand(update.Message.Chat.Id)
+				} else if update.Message.Text == "/test" {
+					testCommand(update.Message.Chat.Id)
+				}
+
 			}
 		}
 	}
