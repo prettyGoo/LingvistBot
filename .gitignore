@@ -1,3 +1,14 @@
 bot/src/server/server
 bot/src/server/api_token.go
 
+./idea
+.idea/LingvistBot.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+
+
+/government
+/hobbies
+/news
+/reviews

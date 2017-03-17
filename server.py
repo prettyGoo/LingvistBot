@@ -2,8 +2,6 @@ import logging
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler,CallbackQueryHandler, Filters, ConversationHandler
 
-from classifier.bayes import Bayes
-
 from bot_handlers import start, train, train_bayes, train2_bayes, test, test_bayes, accuracy
 from bot_handlers import button
 from bot_handlers import error
