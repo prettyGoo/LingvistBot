@@ -6,12 +6,15 @@ from bot_handlers import start, train, train_bayes, train2_bayes, test, test_bay
 from bot_handlers import button
 from bot_handlers import error
 
+
+from token_api import token_api
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 WAITING_FOR_TEST, WAITING_FOR_TRAIN, WAITING_FOR_TRAIN2 = range(3)
 
-updater = Updater("373643335:AAGSpALhhKzZdsMkMGxoYI1nh7UPoO4FLvg")
+updater = Updater(token_api())
 
 
 test_handler = ConversationHandler(
