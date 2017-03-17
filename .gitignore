@@ -8,6 +8,12 @@ bot/src/server/api_token.go
 .idea/workspace.xml
 
 
+__pycache__/*.pyc
+
+
+token_api.py
+
+
 /government
 /hobbies
 /news
