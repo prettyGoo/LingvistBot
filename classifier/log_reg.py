@@ -19,38 +19,23 @@ from nltk.corpus import stopwords
 X = np.array([], dtype=object)
 y = np.array([], dtype=object)
 
-categories = ['hobbies', 'news', 'government', 'reviews']
+brown_categories = ['hobbies', 'news', 'government', 'reviews']
 
-for category in categories:
-  for fileid in brown.fileids(category):
+for brown_category in brown_categories:
+  for fileid in brown.fileids(brown_category):
     doc = ''
     for w in brown.words(fileid):
       doc += '%s ' % w
     X = np.append(X, doc)
-    y = np.append(y, category)
+    y = np.append(y, brown_category)
 
-files_n = len([name for name in os.listdir('../news')])
-for i in range(1, files_n + 1):
-  file = open('../news/news_0%s.txt' % i)
-  doc = file.read()
-  X = np.append(X, doc)
-  y = np.append(y, 'news')
+    files_n = len([name for name in os.listdir('../%s' % brown_category)])
+    for i in range(1, files_n + 1):
+      file = open('../{}/{}_0{}.txt'.format(brown_category, brown_category, i))
+      doc = file.read()
+      X = np.append(X, doc)
+      y = np.append(y, '%s' % brown_category)
 
-
-files_n = len([name for name in os.listdir('../reviews')])
-for i in range(1, files_n + 1):
-  file = open('../reviews/reviews_0%s.txt' % i)
-  doc = file.read()
-  X = np.append(X, doc)
-  y = np.append(y, 'reviews')
-
-
-files_n = len([name for name in os.listdir('../government')])
-for i in range(1, files_n + 1):
-  file = open('../government/government_0%s.txt' % i)
-  doc = file.read()
-  X = np.append(X, doc)
-  y = np.append(y, 'government')
 
 # Cleaning text data
 for i in range(len(X)):

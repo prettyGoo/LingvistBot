@@ -29,7 +29,7 @@ train_handler = ConversationHandler(
     entry_points=[CommandHandler('train', train_bayes)],
     states={
         WAITING_FOR_TEXT: [MessageHandler(Filters.text, train_bayes__text)],
-        WAITING_FOR_LABEL: [MessageHandler(Filters.text, train_bayes__label)]
+        WAITING_FOR_LABEL: [CallbackQueryHandler(train_bayes__label)]
     },
     fallbacks=[CommandHandler('start', start)]
 )
