@@ -69,7 +69,8 @@ def train2_bayes(bot, update):
 
 @run_async
 def test(bot, update):
-    update.message.reply_text('Input some text (it must not exceed one Telegram message)М')
+    update.message.reply_text('Input some text (it must not exceed one Telegram message)'
+                              'Now next label are available: news, government, hobbies, reviews')
     return WAITING_FOR_TEST
 
 
