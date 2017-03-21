@@ -24,7 +24,7 @@ for i in range(1, 10):
     print(a)
 
 
-WAITING_FOR_TEST, WAITING_FOR_TRAIN, WAITING_FOR_TRAIN2 = range(3)
+WAITING_FOR_TEST, WAITING_FOR_TEXT, WAITING_FOR_LABEL = range(3)
 
 
 def start(bot, update):
@@ -34,14 +34,14 @@ def start(bot, update):
 
 
 @run_async
-def train(bot, update):
+def train_bayes(bot, update):
     update.message.reply_text('Input some text and its label in two different Telegram messages. '
                               'The length of the text must be at least 500 characters and within one Telegram message')
 
-    return WAITING_FOR_TRAIN
+    return WAITING_FOR_TEXT
 
 
-def train_bayes(bot, update):
+def train_bayes__text(bot, update):
     th.training_text = update.message.text.lower()
     if len(th.training_text) < 500:
         update.message.reply_text('Your text must contain at least 500 characters.\nTry again with /test')
@@ -49,10 +49,10 @@ def train_bayes(bot, update):
         update.message.reply_text('Input label for your text.\n'
                                   'It must be one of these: news, hobbies, government, reviews')
 
-    return WAITING_FOR_TRAIN2
+    return WAITING_FOR_LABEL
 
 
-def train2_bayes(bot, update):
+def train_bayes__label(bot, update):
     th.training_label = update.message.text.lower()
     if th.training_label not in ['news', 'reviews', 'government', 'hobbies']:
         th.training_label = ''
@@ -68,25 +68,17 @@ def train2_bayes(bot, update):
 
 
 @run_async
-def test(bot, update):
+def test_bayes(bot, update):
     update.message.reply_text('Input some text (it must not exceed one Telegram message)'
                               'Now next label are available: news, government, hobbies, reviews')
     return WAITING_FOR_TEST
 
 
-def test_bayes(bot, update):
+def test_bayes__text(bot, update):
     text = update.message.text.lower()
     if len(text) < 500:
         update.message.reply_text('Your text must contain at least 500 characters.\nTry again with /test')
     else:
-
-    #
-    # keyboard = [[InlineKeyboardButton("Bayes", callback_data='bayes'),
-    #            InlineKeyboardButton("CNN", callback_data='cnn')],
-    #           [InlineKeyboardButton("Назад", callback_data='back')]]
-    #
-    # reply_markup = InlineKeyboardMarkup(keyboard)
-    # update.message.reply_text('Please choose:', reply_markup=reply_markup)
         words = text.replace('\n', ' ').split(' ')
         features = bayes.document_features(words)
         label = bayes.classify(features)
