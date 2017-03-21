@@ -6,3 +6,5 @@ Return your token in api_token.py through api_token function
 Bayes algorithm is implemented<br/>
 Test/Train commands are added to the bot
 
+# Vesrion 1.1
+Logistic regression algorithm is implemented<br/>
