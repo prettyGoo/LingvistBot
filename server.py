@@ -2,7 +2,7 @@ import logging
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler,CallbackQueryHandler, Filters, ConversationHandler
 
-from bot_handlers import start, train, train_bayes, train2_bayes, test, test_bayes, accuracy
+from bot_handlers import start, train_bayes, train_bayes__text, train_bayes__label, test_bayes, test_bayes__text, accuracy
 from bot_handlers import button
 from bot_handlers import error
 
@@ -12,24 +12,24 @@ from token_api import token_api
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
-WAITING_FOR_TEST, WAITING_FOR_TRAIN, WAITING_FOR_TRAIN2 = range(3)
+WAITING_FOR_TEST, WAITING_FOR_TEXT, WAITING_FOR_LABEL = range(3)
 
 updater = Updater(token_api())
 
 
 test_handler = ConversationHandler(
-    entry_points=[CommandHandler('test', test)],
+    entry_points=[CommandHandler('test', test_bayes)],
     states={
-        WAITING_FOR_TEST: [MessageHandler(Filters.text, test_bayes)]
+        WAITING_FOR_TEST: [MessageHandler(Filters.text, test_bayes__text)]
     },
     fallbacks=[CommandHandler('start', start)]
 )
 
 train_handler = ConversationHandler(
-    entry_points=[CommandHandler('train', train)],
+    entry_points=[CommandHandler('train', train_bayes)],
     states={
-        WAITING_FOR_TRAIN: [MessageHandler(Filters.text, train_bayes)],
-        WAITING_FOR_TRAIN2: [MessageHandler(Filters.text, train2_bayes)]
+        WAITING_FOR_TEXT: [MessageHandler(Filters.text, train_bayes__text)],
+        WAITING_FOR_LABEL: [CallbackQueryHandler(train_bayes__label)]
     },
     fallbacks=[CommandHandler('start', start)]
 )

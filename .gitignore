@@ -1,14 +1,13 @@
 bot/src/server/server
 bot/src/server/api_token.go
 
-./idea
+.idea
 .idea/LingvistBot.iml
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
 
 
-__pycache__/*.pyc
 
 
 token_api.py
